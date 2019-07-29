@@ -2,7 +2,7 @@
         Check RaveApi.Test project progam file for full Implementation.
         
         install from Nuget.
-        Install-Package RaveApi -Version 1.0.0
+        Install-Package RaveApi 
         
         Rave website.
         https://developer.flutterwave.com/
