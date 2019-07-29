@@ -1,6 +1,19 @@
 # RaveApi
 Check RaveApi.Test for Implementation.
 
+
+         // use your secret key from Rave Dashboard
+        static string Secretkey = "Your Rave Secret key";
+
+        // use your Public key from Rave Dashboard
+        static string PublicKey = "Your Rave Public Key";
+        static string chargeEndpoint = "charge";
+        static string validationEndpoint = "validatecharge";
+        
+        
+        
+        
+        
             Payment payment = new Payment();
 
             var key = payment.GetEncryptionKey(Secretkey);
