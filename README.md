@@ -61,7 +61,7 @@
                 suggested_auth = suggested_auth,
                 pin = pin,
                 email = "info@storefella.com",
-                phonenumber = "08067827856",
+                phonenumber = "08012345678",
                 firstname = "Ekene",
                 lastname = "Duru",
                 IP = GetIPAddress(), 
