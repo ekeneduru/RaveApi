@@ -1,5 +1,5 @@
 # RaveApi
-Check RaveApi.Test project for full Implementation.
+Check RaveApi.Test project progam file for full Implementation.
 
 
          // use your secret key from Rave Dashboard
