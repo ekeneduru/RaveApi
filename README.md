@@ -1,5 +1,5 @@
 # RaveApi
-        Check RaveApi.Test project progam file for full Implementation.
+        Check RaveApi.Test project program file for full Implementation.
         
         install from Nuget.
         Install-Package RaveApi 
