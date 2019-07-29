@@ -8,40 +8,47 @@ namespace RaveApi.Test
 {
     class Program
     {
-        static string Secretkey = "FLWSECK_TEST-9ee9d0e4622c04dbd2bc066266135e06-X";
-        static string PublicKey = "FLWPUBK_TEST-534e215f89614de928d42d61126a696c-X";
+        // use your secret key from Rave Dashboard
+        static string Secretkey = "Your Rave Secret key";
+
+        // use your Public key from Rave Dashboard
+        static string PublicKey = "Your Rave Public Key";
         static string chargeEndpoint = "charge";
         static string validationEndpoint = "validatecharge";
         static async System.Threading.Tasks.Task Main(string[] args)
         {
 
-            Payment pay = new Payment();
+            Payment payment = new Payment();
 
-            var key = pay.GetEncryptionKey(Secretkey);
+            var key = payment.GetEncryptionKey(Secretkey);
             var json = JsonConvert.SerializeObject(GetData());
-            var encryptedData = pay.EncryptData(key, json);
+            var encryptedData = payment.EncryptData(key, json);
 
             PayLoad postData = GetPayLoad(encryptedData);
             var jsondata = JsonConvert.SerializeObject(postData);
-            ChargeResponse rep = await pay.SuggestCardType(chargeEndpoint, jsondata);
-            if (rep != null && rep.status == "success" && rep.data.suggested_auth == "PIN")
+            ChargeResponse chargeReponse = await payment.SuggestCardType(chargeEndpoint, jsondata);
+            if (chargeReponse != null && chargeReponse.status == "success" && chargeReponse.data.suggested_auth == "PIN")
             {
-                var json2 = JsonConvert.SerializeObject(GetData(rep.data.suggested_auth, "3310"));
-                var encryptedData2 = pay.EncryptData(key, json2);
-                PayLoad postData2 = GetPayLoad(encryptedData2);
-                var jsondata2 = JsonConvert.SerializeObject(postData2);
-                CardResponse rep2 = await pay.InitializePayment(chargeEndpoint, jsondata2);
-                if (rep2 != null && rep2.data.chargeResponseCode == "02" && rep2.data.authModelUsed == "PIN")
+                var rawJsonDataInit = JsonConvert.SerializeObject(GetData(chargeReponse.data.suggested_auth, "3310"));
+                var encryptedDataInit = payment.EncryptData(key, rawJsonDataInit);
+                PayLoad payloadInit = GetPayLoad(encryptedDataInit);
+                var encrptedjsondataInit = JsonConvert.SerializeObject(payloadInit);
+                CardResponse cardReponse = await payment.InitializePayment(chargeEndpoint, encrptedjsondataInit);
+                if (cardReponse != null && cardReponse.data.chargeResponseCode == "02" && cardReponse.data.authModelUsed == "PIN")
                 {
                     var dataRf = new
                     {
                         PBFPubKey = PublicKey,
-                        transaction_reference = rep2.data.txRef,
+                        transaction_reference = cardReponse.data.txRef,
                         otp = "12345"
                     };
                     var jsondf = JsonConvert.SerializeObject(dataRf);
-                    ValidateResponse valReps = await pay.ValidatePayment(validationEndpoint, jsondf);
+                    ValidateResponse valReps = await payment.ValidatePayment(validationEndpoint, jsondf);
                 }
+            }
+            else if(chargeReponse.status=="error")
+            {
+
             }
 
         }
@@ -59,7 +66,6 @@ namespace RaveApi.Test
 
         private static ChargeModel GetData(string suggested_auth = "", string pin = "")
         {
-            var rand = new Random().Next(1000, 9999);
             return new ChargeModel
             {
                 PBFPubKey = PublicKey,
@@ -67,17 +73,18 @@ namespace RaveApi.Test
                 currency = "NGN",
                 country = "NG",
                 cvv = "789",
-                amount = "300",
+                amount = "3002",
                 expiryyear = "19",
                 expirymonth = "09",
                 suggested_auth = suggested_auth,
                 pin = pin,
-                email = "ekeneduru@yahoo.com",
+                email = "info@storefella.com",
                 phonenumber = "08067827856",
                 firstname = "Ekene",
                 lastname = "Duru",
-                IP = GetIPAddress(), // ":1",//HttpContext.Request.UserHostAddress,
-                txRef = $"MXX-ASC-{rand}",
+                IP = GetIPAddress(), 
+                txRef = GenerateTransactionCode(),
+                redirect_url= "https://yourreturnurl/receivepayment",
             };
         }
 
@@ -100,6 +107,13 @@ namespace RaveApi.Test
             }
 
             return ipAddress;
+        }
+
+        public static string GenerateTransactionCode()
+        {
+            Random rd = new Random();
+            string code= "T" + rd.Next(Convert.ToInt32(Math.Pow(10, 9))).ToString("D" + "10");
+            return code;
         }
 
 
