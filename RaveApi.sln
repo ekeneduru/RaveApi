@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaveApi", "RaveApi\RaveApi.csproj", "{CEE6B818-E4AA-4590-8816-6767FB1ECEC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaveApi.Test", "RaveApi.Test\RaveApi.Test.csproj", "{A05C1D43-1B87-46BB-B675-79B17EECB0E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEE6B818-E4AA-4590-8816-6767FB1ECEC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE6B818-E4AA-4590-8816-6767FB1ECEC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE6B818-E4AA-4590-8816-6767FB1ECEC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE6B818-E4AA-4590-8816-6767FB1ECEC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05C1D43-1B87-46BB-B675-79B17EECB0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05C1D43-1B87-46BB-B675-79B17EECB0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05C1D43-1B87-46BB-B675-79B17EECB0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05C1D43-1B87-46BB-B675-79B17EECB0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C860B5AD-08E4-423A-AADD-ECCAEC6AC363}
+	EndGlobalSection
+EndGlobal
