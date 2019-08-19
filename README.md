@@ -3,6 +3,7 @@
         
         install from Nuget.
         Install-Package RaveApi 
+        https://www.nuget.org/packages/RaveApi/
         
         Rave website.
         https://developer.flutterwave.com/
